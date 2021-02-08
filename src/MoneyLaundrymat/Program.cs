@@ -11,6 +11,7 @@ namespace MoneyLaundrymat
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
@@ -43,7 +44,8 @@ namespace MoneyLaundrymat
             {
                 PrepareAccounts();
                 RunSimulation();
-                PrintChart();
+                SaveChartToFile();
+                End();
             }
             catch (Exception ex)
             {
@@ -98,14 +100,16 @@ namespace MoneyLaundrymat
                 var toAccount = toAccounts.ElementAt(index);
 
                 // Transfer some money
-                if (amount > 0)
+                if (amount < 0)
                 {
-                    startAccount.SubtractMoney(amount);
-                    toAccount.AddMoney(amount);
-                    var transaction = new BankTransaction(startAccount.Id, toAccount.Id, amount);
-                    Transactions.Add(transaction);
-                    Console.WriteLine($"{startAccount.Id} --> {toAccount.Id}: {amount} €");
+                    continue;
                 }
+
+                startAccount.SubtractMoney(amount);
+                toAccount.AddMoney(amount);
+                var transaction = new BankTransaction(startAccount.Id, toAccount.Id, amount);
+                Transactions.Add(transaction);
+                Console.WriteLine($"{startAccount.Id} --> {toAccount.Id}: {amount} €");
             }
 
             // Run while we have money on the other accounts and transfer our money around
@@ -125,21 +129,28 @@ namespace MoneyLaundrymat
                 var amount = Random.NextDecimal(0, fromAccount.Amount);
 
                 // Transfer some money
-                if (amount > 0)
+                if (amount < 0)
                 {
-                    fromAccount.SubtractMoney(amount);
-                    toAccount.AddMoney(amount);
-                    var transaction = new BankTransaction(fromAccount.Id, toAccount.Id, amount);
-                    Transactions.Add(transaction);
-                    Console.WriteLine($"{fromAccount.Id} --> {toAccount.Id}: {amount} €");
+                    continue;
                 }
+
+                if (fromAccount.Id is toAccount.Id)
+                {
+                    continue;
+                }
+
+                fromAccount.SubtractMoney(amount);
+                toAccount.AddMoney(amount);
+                var transaction = new BankTransaction(fromAccount.Id, toAccount.Id, amount);
+                Transactions.Add(transaction);
+                Console.WriteLine($"{fromAccount.Id} --> {toAccount.Id}: {amount} Euro");
             }
         }
 
         /// <summary>
-        /// Prints the chart to a file.
+        /// Saves the chart to a file.
         /// </summary>
-        private static void PrintChart()
+        private static void SaveChartToFile()
         {
             var sb = new StringBuilder();
             sb.AppendLine("@startuml");
@@ -148,23 +159,44 @@ namespace MoneyLaundrymat
 
             foreach (var account in Accounts)
             {
-                sb.AppendLine($"component \"Account {account.Id}\" as Account{account.Id} {{");
-                sb.AppendLine("}");
+                if (account.AccountType is AccountType.Start)
+                {
+                    sb.AppendLine($"component \"Start\" as Account{account.Id} {{");
+                    sb.AppendLine("}");
+                }
+                else if (account.AccountType is AccountType.End)
+                {
+                    sb.AppendLine($"component \"End\" as Account{account.Id} {{");
+                    sb.AppendLine("}");
+                }
+                else
+                {
+                    sb.AppendLine($"component \"Account {account.Id}\" as Account{account.Id} {{");
+                    sb.AppendLine("}");
+                }
             }
 
-            //foreach (var transaction in Transactions.GroupBy(t => t.FromAccountId).ThenBy(t => t.ToAccountId))
-            //{
-                
-            //}
-
+            foreach (var group in Transactions.GroupBy(t => new { From = t.FromAccountId, To = t.ToAccountId }))
+            {
+                var sum = group.Sum(i => i.Amount);
+                sb.AppendLine($"file \"{sum} Euro\" as {group.Key.From}To{group.Key.To}");
+                sb.AppendLine($"Account{group.Key.From} --> {group.Key.From}To{group.Key.To}");
+                sb.AppendLine($"{group.Key.From}To{group.Key.To} --> Account{group.Key.To}");
+            }
 
             sb.AppendLine("@enduml");
 
-            //PortalDatabase < --> Portal
-            //Portal < --> RelayApi
-            //Portal < --> BillApi
-            //RelayServer < --> RelayApi
-            //BillServer < --> BillApi
+            File.WriteAllText("result.wsd", sb.ToString());
+        }
+
+        /// <summary>
+        /// Writes the end messages and stops the console from closing.
+        /// </summary>
+        private static void End()
+        {
+            Console.WriteLine("The simulation has stopped, see result.wsd in the executing directory for the result.");
+            Console.WriteLine("Press any key to close.");
+            Console.ReadLine();
         }
     }
 }

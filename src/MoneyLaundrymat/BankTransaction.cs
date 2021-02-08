@@ -17,7 +17,7 @@ namespace MoneyLaundrymat
     public class BankTransaction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BankAccount"/> class.
+        /// Initializes a new instance of the <see cref="BankTransaction"/> class.
         /// </summary>
         /// <param name="fromAccountId">The from account identifier.</param>
         /// <param name="toAccountId">The to account identifier.</param>
