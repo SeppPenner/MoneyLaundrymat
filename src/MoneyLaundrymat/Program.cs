@@ -134,7 +134,7 @@ namespace MoneyLaundrymat
                     continue;
                 }
 
-                if (fromAccount.Id is toAccount.Id)
+                if (fromAccount.Id == toAccount.Id)
                 {
                     continue;
                 }
