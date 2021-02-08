@@ -100,7 +100,7 @@ namespace MoneyLaundrymat
                 var toAccount = toAccounts.ElementAt(index);
 
                 // Transfer some money
-                if (amount < 0)
+                if (amount <= 0)
                 {
                     continue;
                 }
@@ -129,7 +129,7 @@ namespace MoneyLaundrymat
                 var amount = Random.NextDecimal(0, fromAccount.Amount);
 
                 // Transfer some money
-                if (amount < 0)
+                if (amount <= 0)
                 {
                     continue;
                 }
