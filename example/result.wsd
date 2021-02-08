@@ -1,0 +1,108 @@
+@startuml
+
+skinparam componentStyle uml2
+component "Start" as Account1 {
+}
+component "Account 2" as Account2 {
+}
+component "Account 3" as Account3 {
+}
+component "Account 4" as Account4 {
+}
+component "Account 5" as Account5 {
+}
+component "Account 6" as Account6 {
+}
+component "End" as Account7 {
+}
+file "499230,64 Euro" as 1To3
+Account1 --> 1To3
+1To3 --> Account3
+file "346845,04 Euro" as 1To6
+Account1 --> 1To6
+1To6 --> Account6
+file "92181,48 Euro" as 1To4
+Account1 --> 1To4
+1To4 --> Account4
+file "57393,19 Euro" as 1To5
+Account1 --> 1To5
+1To5 --> Account5
+file "4349,65 Euro" as 1To2
+Account1 --> 1To2
+1To2 --> Account2
+file "857112,53 Euro" as 2To6
+Account2 --> 2To6
+2To6 --> Account6
+file "428875,36 Euro" as 2To4
+Account2 --> 2To4
+2To4 --> Account4
+file "934101,12 Euro" as 3To2
+Account3 --> 3To2
+3To2 --> Account2
+file "463309,01 Euro" as 5To3
+Account5 --> 5To3
+5To3 --> Account3
+file "1077192,21 Euro" as 6To4
+Account6 --> 6To4
+6To4 --> Account4
+file "171248,45 Euro" as 3To4
+Account3 --> 3To4
+3To4 --> Account4
+file "436591,97 Euro" as 3To7
+Account3 --> 3To7
+3To7 --> Account7
+file "73718,41 Euro" as 5To7
+Account5 --> 5To7
+5To7 --> Account7
+file "252894,81 Euro" as 2To3
+Account2 --> 2To3
+2To3 --> Account3
+file "208143,63 Euro" as 5To2
+Account5 --> 5To2
+5To2 --> Account2
+file "140085,29 Euro" as 3To5
+Account3 --> 3To5
+3To5 --> Account5
+file "463893,87 Euro" as 4To6
+Account4 --> 4To6
+4To6 --> Account6
+file "698192,90 Euro" as 3To6
+Account3 --> 3To6
+3To6 --> Account6
+file "1126509,23 Euro" as 6To3
+Account6 --> 6To3
+6To3 --> Account3
+file "521120,78 Euro" as 5To6
+Account5 --> 5To6
+5To6 --> Account6
+file "38276,04 Euro" as 4To3
+Account4 --> 4To3
+4To3 --> Account3
+file "699075,30 Euro" as 4To5
+Account4 --> 4To5
+4To5 --> Account5
+file "703063,71 Euro" as 4To2
+Account4 --> 4To2
+4To2 --> Account2
+file "198763,72 Euro" as 6To7
+Account6 --> 6To7
+6To7 --> Account7
+file "427955,58 Euro" as 6To2
+Account6 --> 6To2
+6To2 --> Account2
+file "491146,79 Euro" as 2To5
+Account2 --> 2To5
+2To5 --> Account5
+file "178153,12 Euro" as 5To4
+Account5 --> 5To4
+5To4 --> Account4
+file "56744,38 Euro" as 6To5
+Account6 --> 6To5
+6To5 --> Account5
+file "247584,20 Euro" as 2To7
+Account2 --> 2To7
+2To7 --> Account7
+file "43341,70 Euro" as 4To7
+Account4 --> 4To7
+4To7 --> Account7
+@enduml
