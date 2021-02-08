@@ -109,7 +109,7 @@ namespace MoneyLaundrymat
                 toAccount.AddMoney(amount);
                 var transaction = new BankTransaction(startAccount.Id, toAccount.Id, amount);
                 Transactions.Add(transaction);
-                Console.WriteLine($"{startAccount.Id} --> {toAccount.Id}: {amount} €");
+                Console.WriteLine($"{startAccount.Id} --> {toAccount.Id}: {amount} Euro");
             }
 
             // Run while we have money on the other accounts and transfer our money around
