@@ -2,7 +2,6 @@ MoneyLaundrymat
 =============
 
 MoneyLaundrymat is an executable to simulate the process of laundering money.
-The executable was written and tested in .Net 5.0.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/qn0qec3gd84nd89k?svg=true)](https://ci.appveyor.com/project/SeppPenner/moneylaundrymat)
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/MoneyLaundrymat.svg)](https://github.com/SeppPenner/MoneyLaundrymat/issues)
