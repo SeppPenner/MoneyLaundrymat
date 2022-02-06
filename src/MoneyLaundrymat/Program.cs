@@ -23,17 +23,17 @@ namespace MoneyLaundrymat
         /// <summary>
         /// The bank accounts.
         /// </summary>
-        private static readonly List<BankAccount> Accounts = new List<BankAccount>();
+        private static readonly List<BankAccount> Accounts = new();
 
         /// <summary>
         /// The bank transactions.
         /// </summary>
-        private static readonly List<BankTransaction> Transactions = new List<BankTransaction>();
+        private static readonly List<BankTransaction> Transactions = new();
 
         /// <summary>
         /// The random generator.
         /// </summary>
-        private static readonly Random Random = new Random();
+        private static readonly Random Random = new();
 
         /// <summary>
         /// The main method.
